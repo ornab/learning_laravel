@@ -1,5 +1,7 @@
 <?php
 
+use App\Post;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,39 +33,106 @@ use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
-| Raw SQL Queries 
+| Database Raw SQL Queries 
 |--------------------------------------------------------------------------
 |
 */
 
 Route::get('/insert',function(){
     
-    DB::insert('insert into posts(title,content) values(?, ?)', ['PHP with Laravel', 'Laravel is the best framework for php']);
+    DB::insert('insert into posts(title,content) values(?, ?)', ['PHP with Laravel 2', 'Laravel is the best thing to happened for php']);
     
 });
+//
+//Route::get('/read', function(){
+//    
+//  $results = DB::select('select * from posts where id=?', [1]);
+//    
+//    foreach($results as $post){
+//        
+//        echo $post->title . ' ' . ' & ';
+//        echo $post->content;
+//        
+//        
+//    }
+//       
+//});
+//
+//Route::get('/update', function(){
+//    
+//    $updated = DB::update('update posts set title = "updated title" where id=?', [1]);
+//    
+//    return $updated;
+//    
+//    
+//});
+//
+//Route::get('/delete', function(){
+//    
+//   $deleted = DB::delete ('delete from posts where id=?', [1]);
+//    
+//    return $deleted;
+//    
+//});
+
+/*
+|--------------------------------------------------------------------------
+| Eloquent ORM
+|--------------------------------------------------------------------------
+|
+*/
 
 Route::get('/read', function(){
     
-  $results = DB::select('select * from posts where id=?', [1]);
+    $posts = Post::all();
     
-    foreach($results as $post){
+    foreach($posts as $post){
         
-        echo $post->title . ' ' . ' & ';
-        echo $post->content;
-        
+        return $post->title;
         
     }
-       
+    
+    
 });
 
-Route::get('/update', function(){
+
+Route::get('/find',function(){
     
-    $updated = DB::update('update posts set title = "updated title" where id=?', [1]);
+    $posts = Post::find(1);
     
-    return $updated;
+    return $posts->content;
+    
+//    foreach($posts as $post){
+//        
+//        return $post->title;
+//        
+//    }
     
     
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
