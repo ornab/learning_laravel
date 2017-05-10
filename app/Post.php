@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Post extends Model
 {
+    use SoftDeletes;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,9 @@ class Post extends Model
 */
     //protected $table = 'posts'; //Now we can use the posts table with the class PostAdmin
     // protected $primaryKey = 'post_id'; //Now we can use 'post_id' as primary key
+    
+    
+    protected $dates = ['deleted_at'];
      
     
     protected $fillable = [

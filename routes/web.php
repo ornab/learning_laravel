@@ -180,12 +180,63 @@ Route::get('/update', function(){
 
 Route::get('/delete', function(){
     
-  $post = Post::find(6);
+  $post = Post::find(5);
     
        
    $post->delete();
 });
 
+//Route::get('/delete2', function(){
+//    
+//    Post::destroy(4); //single item delete
+//    Post::destroy([4,5]); //multiple items delete
+//    
+//    //Another method (if I want to run query)
+//    
+//    Post::where('id', 4)->where('is_admin', 0)->delete();
+//    
+//    
+//});
+
+Route::get('/softdelete', function(){
+    
+    Post::find(4)->delete();
+    
+    
+});
+
+//Route::get('/readsoftdelete', function(){
+//    
+////    $post = Post::find(4);
+////    
+////    return $post;
+//    
+// // $post =  Post::withTrashed()->where('id', 4)->get();  // It will return all items including trashed items
+//    
+//   $post = Post::onlyTrashed()->where('is_admin', 0)->get(); // It will return only trashed items
+//    
+//    return $post;
+//    
+//});
+//
+//Route::get('/restore', function(){
+//    
+//    
+//    Post::withTrashed()->where('is_admin', 0)->restore();
+//    
+//    
+//});
+
+
+Route::get('/forcedelete', function(){
+    
+    //Post::onlyTrashed()->where('is_admin', 0)->forceDelete();
+    
+    Post::withTrashed()->where('id', 5)->forceDelete();
+    
+    
+    
+});
 
 
 
