@@ -38,11 +38,11 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get('/insert',function(){
-    
-    DB::insert('insert into posts(title,content) values(?, ?)', ['PHP with Laravel 2', 'Laravel is the best thing to happened for php']);
-    
-});
+//Route::get('/insert',function(){
+//    
+//    DB::insert('insert into posts(title,content) values(?, ?)', ['PHP with Laravel 2', 'Laravel is the best thing to happened for php']);
+//    
+//});
 //
 //Route::get('/read', function(){
 //    
@@ -88,7 +88,9 @@ Route::get('/read', function(){
     
     foreach($posts as $post){
         
-        return $post->title;
+        echo $post->title .'<br>';
+        echo $post->content.'<br>';
+        
         
     }
     
@@ -100,7 +102,7 @@ Route::get('/find',function(){
     
     $posts = Post::find(1);
     
-    return $posts->content;
+    return $posts->title;
     
 //    foreach($posts as $post){
 //        
@@ -110,7 +112,42 @@ Route::get('/find',function(){
     
     
 });
-
+//
+//Route::get('/findwhere', function(){
+//    
+//    
+//    $posts = Post::where('id',2)->orderBy('id','desc')->take(1)->get();
+//    
+//    foreach($posts as $post){
+//        
+//        return $post->title;
+//        
+//    }
+//    
+//});
+//
+////Route::get('/findmore', function(){
+////    
+//////    $posts= Post::findOrFail(1);
+//////    return $posts;
+////    
+////    $posts = Post::where('users_count', '<', 50)->findOrFail();
+////    
+////    
+////});
+//
+//Route::get('/basicinsert', function(){
+//    
+//    $post = new Post;
+//    
+//    $post->title = 'PHP & Laravel 3';
+//    $post->content = 'Eloquent way of inserting';
+//    
+//    $post->save();
+//    
+//    
+//    
+//});
 
 
 
