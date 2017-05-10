@@ -26,4 +26,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    public function post(){                  
+                                            //
+        return $this->hasOne('App\Post');   //It will automatically refer to 'user_id', if you have to refer to another column                                         // then you have to define that as a second parameter,                                                                     // Like  "return$this>hasOne('App\Post','the_user_id');"
+                                            //
+    }
+    
+    
+    public function posts(){
+        
+        return $this->hasMany('App\Post');
+        
+    }
+    
+    public function roles(){
+        
+        return $this->belongsToMany('App\Role');
+    }
+    
+    
 }

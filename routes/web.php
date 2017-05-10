@@ -1,6 +1,8 @@
 <?php
 
 use App\Post;
+use App\User;
+use App\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -237,6 +239,73 @@ Route::get('/forcedelete', function(){
     
     
 });
+
+/*
+|--------------------------------------------------------------------------
+| Eloquent Relationships
+|--------------------------------------------------------------------------
+|
+*/
+
+//One to One Relationship (hasOne) 
+
+//Route::get('/user/{id}/post', function($id){
+//    
+//    
+//    $post = User::find($id)->post->title;
+//    
+//    return $post;
+//    
+//});
+
+//Inverse /One to One Relationship 
+
+//Route::get('/post/{id}/user', function($id){
+//    
+//    
+//   return Post::find($id)->user->name;
+//    
+//
+//});
+
+//One to Many Relationship (hasMany)
+
+Route::get('/posts', function(){
+    
+    $user = User::find(1);
+    
+    foreach($user->posts as $post){
+        
+        echo $post->title . "<br>";
+       // echo $post->content . "<br>";
+        
+    }
+    
+    
+});
+
+
+//Many to Many Relationship (belongsToMany)
+
+
+Route::get('/user/{id}/role', function($id){
+    
+//   $user = User::find($id);
+//    
+//    foreach ($user->roles as $role){
+//        
+//        echo $role->name . "<br";
+//        
+//    }
+//    
+    
+    $user = User::find($id)->roles()->orderBy('id', 'desc')->get();
+    
+    return $user;
+    
+});
+
+
 
 
 
