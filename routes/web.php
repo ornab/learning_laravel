@@ -149,9 +149,42 @@ Route::get('/find',function(){
 //    
 //});
 
+//Route::get('/basicupdate', function(){
+//    
+//    $post = Post::find(1);
+//    
+//    $post->title = 'PHP & Laravel 3';
+//    $post->content = 'Eloquent way of inserting';
+//    
+//    $post->save();
+//    
+//    
+//    
+//});
 
 
+Route::get('/create', function(){
+    
+    
+   Post::create(['title'=>'This is Eloquent Create 2', 'content'=>'Wow eloquent is really awesome!']);
+    
+   
+    
+});
 
+Route::get('/update', function(){
+    
+   Post::where('id', 3)->where('is_admin', 0)-> update(['title'=>'Eloquent update', 'content'=>'Updating with eloquent is awesome']); 
+    
+});
+
+Route::get('/delete', function(){
+    
+  $post = Post::find(6);
+    
+       
+   $post->delete();
+});
 
 
 
