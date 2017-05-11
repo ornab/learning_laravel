@@ -2,6 +2,9 @@
 
 use App\Country;
 use App\Photo;
+use App\Video;
+use App\Tag;
+use App\Taggable;
 use App\Post;
 use App\User;
 use App\Role;
@@ -371,8 +374,43 @@ use Illuminate\Support\Facades\DB;
 //    
 //});
 
+//Route::get('/photo/{id}/post', function($id){
+//    
+//    $photo = Photo::findOrFail($id);
+//    
+//    return $photo->imageable;
+//    
+//    
+//    
+//    
+//});
+
+Route::get('/post/tag', function(){
+    
+    $post = Post::find(1);
+    
+    foreach($post->tags as $tag){
+        
+        echo $tag->name;
+        
+    }
+    
+    
+});
 
 
+Route::get('/tag/post', function(){
+    
+    $tag = Tag::find(2);
+    
+    foreach($tag->posts as $post){
+        
+        echo $post->title;
+        
+    }
+    
+    
+});
 
 
 
