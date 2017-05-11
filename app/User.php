@@ -42,7 +42,11 @@ class User extends Authenticatable
     
     public function roles(){
         
-        return $this->belongsToMany('App\Role');
+        return $this->belongsToMany('App\Role')->withPivot('created_at');
+        
+        //If I want to customize the table to join then i will define it with 2nd parameter & The third argument is the foreign //key name of the model on which you are defining the relationship, while the fourth argument is the foreign key name of //the model that you are joining to
+       
+        // return $this->belongsToMany('App\Role', 'user_roles', 'user_id','role_id' );
     }
     
     

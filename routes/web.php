@@ -1,8 +1,10 @@
 <?php
 
+use App\Country;
 use App\Post;
 use App\User;
 use App\Role;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -84,36 +86,36 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get('/read', function(){
-    
-    $posts = Post::all();
-    
-    foreach($posts as $post){
-        
-        echo $post->title .'<br>';
-        echo $post->content.'<br>';
-        
-        
-    }
-    
-    
-});
-
-
-Route::get('/find',function(){
-    
-    $posts = Post::find(1);
-    
-    return $posts->title;
-    
+//Route::get('/read', function(){
+//    
+//    $posts = Post::all();
+//    
 //    foreach($posts as $post){
 //        
-//        return $post->title;
+//        echo $post->title .'<br>';
+//        echo $post->content.'<br>';
+//        
 //        
 //    }
-    
-    
-});
+//    
+//    
+//});
+
+
+//Route::get('/find',function(){
+//    
+//    $posts = Post::find(1);
+//    
+//    return $posts->title;
+//    
+////    foreach($posts as $post){
+////        
+////        return $post->title;
+////        
+////    }
+//    
+//    
+//});
 //
 //Route::get('/findwhere', function(){
 //    
@@ -165,28 +167,28 @@ Route::get('/find',function(){
 //});
 
 
-Route::get('/create', function(){
-    
-    
-   Post::create(['title'=>'This is Eloquent Create 2', 'content'=>'Wow eloquent is really awesome!']);
-    
-   
-    
-});
+//Route::get('/create', function(){
+//    
+//    
+//   Post::create(['title'=>'This is Eloquent Create 2', 'content'=>'Wow eloquent is really awesome!']);
+//    
+//   
+//    
+//});
 
-Route::get('/update', function(){
-    
-   Post::where('id', 3)->where('is_admin', 0)-> update(['title'=>'Eloquent update', 'content'=>'Updating with eloquent is awesome']); 
-    
-});
+//Route::get('/update', function(){
+//    
+//   Post::where('id', 3)->where('is_admin', 0)-> update(['title'=>'Eloquent update', 'content'=>'Updating with eloquent is awesome']); 
+//    
+//});
 
-Route::get('/delete', function(){
-    
-  $post = Post::find(5);
-    
-       
-   $post->delete();
-});
+//Route::get('/delete', function(){
+//    
+//  $post = Post::find(5);
+//    
+//       
+//   $post->delete();
+//});
 
 //Route::get('/delete2', function(){
 //    
@@ -200,12 +202,12 @@ Route::get('/delete', function(){
 //    
 //});
 
-Route::get('/softdelete', function(){
-    
-    Post::find(4)->delete();
-    
-    
-});
+//Route::get('/softdelete', function(){
+//    
+//    Post::find(4)->delete();
+//    
+//    
+//});
 
 //Route::get('/readsoftdelete', function(){
 //    
@@ -230,15 +232,15 @@ Route::get('/softdelete', function(){
 //});
 
 
-Route::get('/forcedelete', function(){
-    
-    //Post::onlyTrashed()->where('is_admin', 0)->forceDelete();
-    
-    Post::withTrashed()->where('id', 5)->forceDelete();
-    
-    
-    
-});
+//Route::get('/forcedelete', function(){
+//    
+//    //Post::onlyTrashed()->where('is_admin', 0)->forceDelete();
+//    
+//    Post::withTrashed()->where('id', 5)->forceDelete();
+//    
+//    
+//    
+//});
 
 /*
 |--------------------------------------------------------------------------
@@ -270,41 +272,71 @@ Route::get('/forcedelete', function(){
 
 //One to Many Relationship (hasMany)
 
-Route::get('/posts', function(){
-    
-    $user = User::find(1);
-    
-    foreach($user->posts as $post){
-        
-        echo $post->title . "<br>";
-       // echo $post->content . "<br>";
-        
-    }
-    
-    
-});
+//Route::get('/posts', function(){
+//    
+//    $user = User::find(1);
+//    
+//    foreach($user->posts as $post){
+//        
+//        echo $post->title . "<br>";
+//       // echo $post->content . "<br>";
+//        
+//    }
+//    
+//    
+//});
 
 
 //Many to Many Relationship (belongsToMany)
 
 
-Route::get('/user/{id}/role', function($id){
-    
-//   $user = User::find($id);
+//Route::get('/user/{id}/role', function($id){
 //    
-//    foreach ($user->roles as $role){
+////   $user = User::find($id);
+////    
+////    foreach ($user->roles as $role){
+////        
+////        echo $role->name . "<br";
+////        
+////    }
+////    
+//    
+//    $user = User::find($id)->roles()->orderBy('id', 'desc')->get();
+//    
+//    return $user;
+//    
+//});
+
+
+//Accessing the Intermediate Table (Pivot Table)
+
+
+//Route::get('/user/pivot', function(){
+//    
+//    $user = User::find(1);
+//    
+//    foreach($user->roles as $role){
 //        
-//        echo $role->name . "<br";
+//        echo $role->pivot->created_at;
 //        
 //    }
 //    
+//    
+//});
+
+
+Route::get('/user/country', function(){
     
-    $user = User::find($id)->roles()->orderBy('id', 'desc')->get();
+    $country = Country::find(5);
     
-    return $user;
+    foreach($country->posts as $post){
+        
+        return $post->title;
+        
+    }
+    
     
 });
-
 
 
 
