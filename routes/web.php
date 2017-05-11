@@ -1,6 +1,7 @@
 <?php
 
 use App\Country;
+use App\Photo;
 use App\Post;
 use App\User;
 use App\Role;
@@ -325,18 +326,50 @@ use Illuminate\Support\Facades\DB;
 //});
 
 
-Route::get('/user/country', function(){
-    
-    $country = Country::find(5);
-    
-    foreach($country->posts as $post){
-        
-        return $post->title;
-        
-    }
-    
-    
-});
+//Route::get('/user/country', function(){
+//    
+//    $country = Country::find(5);
+//    
+//    foreach($country->posts as $post){
+//        
+//        return $post->title;
+//        
+//    }
+//    
+//    
+//});
+
+
+//Polymorphic Relations
+
+//Route::get('/user/photos', function(){
+//    
+//    $user = User::find(1);
+//    
+//    foreach($user->photos as $photo){
+//        
+//        return $photo->path;
+//        
+//    }
+//    
+//    
+//    
+//});
+
+
+//Route::get('/post/photos', function(){
+//    
+//    $post = Post::find(1);
+//    
+//    foreach($post->photos as $photo){
+//        
+//       echo $photo->path . '<br>';
+//        
+//    }
+//    
+//    
+//    
+//});
 
 
 
